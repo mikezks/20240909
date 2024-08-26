@@ -1,0 +1,29 @@
+<form [formGroup]="inputFilterForm">
+  <div class="form-group">
+    <label for="from">From:</label>
+    <input id="from" formControlName="from" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="to">To:</label>
+    <input id="to" formControlName="to" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>
+      <input formControlName="urgent" type="checkbox" />
+      Urgent (When it's urgent it fails -- like in real life ;-))
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button
+      (click)="triggerSearch()"
+      [disabled]="!inputFilterForm.valid"
+      class="btn btn-default"
+    >
+      Search
+    </button>
+
+    <ng-content select=".flight-filter-button"></ng-content>
+    <ng-content select=".flight-filter-info"></ng-content>
+  </div>
+</form>
