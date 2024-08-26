@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
+import { Injectable, inject } from "@angular/core";
 import { Observable } from "rxjs";
 import { Passenger } from "../model/passenger";
 
@@ -8,10 +8,10 @@ import { Passenger } from "../model/passenger";
   providedIn: 'root'
 })
 export class PassengerService {
+  private http = inject(HttpClient);
+
   passengers: Passenger[] = [];
   private baseUrl = `https://demo.angulararchitects.io/api`;
-
-  constructor(private http: HttpClient) {}
 
   load(firstname?: string, lastname?: string): void {
     this.find(firstname, lastname).subscribe({

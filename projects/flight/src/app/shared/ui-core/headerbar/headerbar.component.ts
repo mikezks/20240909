@@ -1,16 +1,16 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 
 @Component({
   selector: 'app-headerbar-cmp',
+  standalone: true,
   templateUrl: 'headerbar.component.html'
 })
 export class HeaderbarComponent {
-  private body = this.document.getElementsByTagName('body')[0];
-  sidebarVisible = false;
+  private readonly body = inject(DOCUMENT).getElementsByTagName('body')[0];
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  sidebarVisible = false;
 
   sidebarToggle() {
     if (this.sidebarVisible == false) {

@@ -1,9 +1,17 @@
+import { DatePipe, NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { injectCdBlink } from '../../../shared/util-cd-visualizer';
 import { Flight } from '../../logic-flight';
 
 
 @Component({
   selector: 'app-flight-card',
+  standalone: true,
+  imports: [
+    NgStyle, DatePipe,
+    RouterLink
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div
@@ -36,9 +44,13 @@ import { Flight } from '../../logic-flight';
         </p>
       </div>
     </div>
+
+    <!-- {{ blink() }} -->
   `
 })
 export class FlightCardComponent {
+  blink = injectCdBlink();
+
   @Input() item?: Flight;
   @Input() selected = false;
   @Output() selectedChange = new EventEmitter<boolean>();

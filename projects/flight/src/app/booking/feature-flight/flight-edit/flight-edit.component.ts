@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { routerFeature } from '../../../shared/logic-router-state';
 import { initialFlight } from '../../logic-flight';
@@ -7,12 +7,18 @@ import { initialFlight } from '../../logic-flight';
 
 @Component({
   selector: 'app-flight-edit',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './flight-edit.component.html'
 })
 export class FlightEditComponent implements OnChanges {
+  private store = inject(Store);
+
   @Input() flight = initialFlight;
 
-  protected editForm = this.formBuilder.group({
+  protected editForm = inject(NonNullableFormBuilder).group({
     id: [0],
     from: [''],
     to: [''],
@@ -20,10 +26,7 @@ export class FlightEditComponent implements OnChanges {
     delayed: [false]
   });
 
-  constructor(
-    private store: Store,
-    private formBuilder: NonNullableFormBuilder
-  ) {
+  constructor() {
     this.store.select(routerFeature.selectRouteParams).subscribe(
       params => console.log(params)
     );

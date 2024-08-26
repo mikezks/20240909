@@ -1,10 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FlightFilter } from '../../logic-flight';
 
 
 @Component({
   selector: 'app-flight-filter',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './flight-filter.component.html'
 })
 export class FlightFilterComponent {
@@ -14,7 +17,7 @@ export class FlightFilterComponent {
 
   @Output() searchTrigger = new EventEmitter<FlightFilter>();
 
-  protected inputFilterForm = this.formBuilder.group({
+  protected inputFilterForm = inject(FormBuilder).nonNullable.group({
     from: ['', [Validators.required]],
     to: ['', [Validators.required]],
     urgent: [false],
@@ -23,8 +26,6 @@ export class FlightFilterComponent {
   protected selectedFilterControl = new FormControl(this.inputFilterForm.getRawValue(), {
     nonNullable: true,
   });
-
-  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   protected triggerSearch(): void {
     this.searchTrigger.emit(this.inputFilterForm.getRawValue());

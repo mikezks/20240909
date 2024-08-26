@@ -1,23 +1,25 @@
-import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { map, switchMap } from 'rxjs';
-import { FlightService } from '../data-access/flight.service';
+import { Injectable, inject } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ticketActions } from "./actions";
-
+import { FlightService } from '../data-access/flight.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketEffects {
+  private actions$ = inject(Actions);
+  private flightService = inject(FlightService);
+
   loadFlights = createEffect(
     /**
      * Stream 1: Dispatched Actions
      *  - Trigger
      *  - State Provider: Action - from, to
-    */
-   () => this.actions$.pipe(
-     // Filtering
-     ofType(ticketActions.flightsLoad),
+     */
+    () => this.actions$.pipe(
+      // Filtering
+      ofType(ticketActions.flightsLoad),
       /**
        * Stream 2: API Backend Call
        *  - State Provider: Array of Flight
@@ -31,8 +33,4 @@ export class TicketEffects {
     )
   );
 
-  constructor(
-    private actions$: Actions,
-    private flightService: FlightService
-  ) {}
 }
