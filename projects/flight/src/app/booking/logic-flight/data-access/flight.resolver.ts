@@ -1,18 +1,20 @@
-import { inject } from "@angular/core";
-import { ActivatedRouteSnapshot } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { ActivatedRouteSnapshot, MaybeAsync, Resolve } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { FlightService } from "./flight.service";
 import { Flight } from "../model/flight";
+import { FlightService } from "./flight.service";
 
 
-export const resolveFlights = (route: ActivatedRouteSnapshot): Observable<Flight> => {
-  const flightService = inject(FlightService);
-  const id = +(route.paramMap.get('id') ?? 0);
-  const flight = flightService.flights.find(f => f.id === id);
+@Injectable({
+  providedIn: 'root'
+})
+export class FlightResolver implements Resolve<Observable<Flight>> {
+  constructor(private flightService: FlightService) {}
 
-  return flight ? of(flight) : flightService.findById(id);
-};
+  resolve(route: ActivatedRouteSnapshot): MaybeAsync<Observable<Flight>> {
+    const id = +(route.paramMap.get('id') ?? 0);
+    const flight = this.flightService.flights.find(f => f.id === id);
 
-export const flightsResolverConfig = {
-  flight: resolveFlights
-};
+    return flight ? of(flight) : this.flightService.findById(id);
+  }
+}
