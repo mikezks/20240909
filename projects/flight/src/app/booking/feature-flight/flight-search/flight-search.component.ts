@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Flight, FlightFilter } from '../../logic-flight';
+import { FlightCardComponent } from '../../ui-flight/flight-card/flight-card.component';
+import { FlightFilterComponent } from '../../ui-flight/flight-filter/flight-filter.component';
 import { TicketsFacade } from './../../logic-flight/+state/facade';
-import { CommonModule } from '@angular/common';
-import { UiFlightModule } from '../../ui-flight/ui-flight.module';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { UiFlightModule } from '../../ui-flight/ui-flight.module';
   standalone: true,
   imports: [
     CommonModule,
-    UiFlightModule
+    FlightCardComponent,
+    FlightFilterComponent
   ],
   templateUrl: './flight-search.component.html',
 })

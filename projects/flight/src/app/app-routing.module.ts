@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './shared/feature-core';
 
 
 const routes: Routes = [
@@ -11,12 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    loadComponent: () => import('./shared/feature-core')
   },
   {
     path: 'booking',
-    loadChildren: () => import('./booking/booking.module')
-      .then(esm => esm.BookingModule)
+    loadChildren: () => import('./booking/booking.routes')
   },
   {
     path: 'checkin',

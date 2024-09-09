@@ -1,13 +1,23 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { FlightBookingComponent, FlightEditComponent, FlightSearchComponent } from './feature-flight';
 import { FlightResolver } from './logic-flight';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { TicketEffects } from './logic-flight/+state/effects';
+import { ticketFeature } from './logic-flight/+state/reducer';
+import { importProvidersFrom } from '@angular/core';
 
 
-const routes: Routes = [
+export const BOOKING_ROUTES: Routes = [
   {
     path: '',
     component: FlightBookingComponent,
+    providers: [
+      importProvidersFrom(
+        StoreModule.forFeature(ticketFeature),
+        EffectsModule.forFeature([TicketEffects])
+      )
+    ],
     children: [
       {
         path: '',
@@ -39,8 +49,4 @@ const routes: Routes = [
   }
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class BookingRoutingModule { }
+export default BOOKING_ROUTES;

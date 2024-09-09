@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtools, StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UiCoreModule } from './shared/ui-core/ui-core.module';
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot(),
     EffectsModule.forRoot(),
     StoreModule.forFeature(routerFeature),
+    StoreDevtoolsModule.instrument(),
     UiCoreModule,
     SharedModule
   ],

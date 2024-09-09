@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   template: `
     <div class="card">
       <div class="card-header">
@@ -30,3 +31,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 }
+
+export default HomeComponent;
