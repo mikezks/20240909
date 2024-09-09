@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
 import { Flight, FlightFilter } from '../../logic-flight';
 import { TicketsFacade } from './../../logic-flight/+state/facade';
+import { CommonModule } from '@angular/common';
+import { UiFlightModule } from '../../ui-flight/ui-flight.module';
 
 
 @Component({
   selector: 'app-flight-search',
+  standalone: true,
+  imports: [
+    CommonModule,
+    UiFlightModule
+  ],
   templateUrl: './flight-search.component.html',
 })
 export class FlightSearchComponent {
