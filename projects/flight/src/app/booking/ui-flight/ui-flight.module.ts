@@ -7,18 +7,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    FlightFilterComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    FlightCardComponent,
-  ],
-  exports: [
-    FlightCardComponent,
-    FlightFilterComponent
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FlightCardComponent,
+        FlightFilterComponent,
+    ],
+    exports: [
+        FlightCardComponent,
+        FlightFilterComponent
+    ]
 })
 export class UiFlightModule { }

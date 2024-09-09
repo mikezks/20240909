@@ -1,13 +1,15 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { routerFeature } from '../../../shared/logic-router-state';
 import { initialFlight } from '../../logic-flight';
 
 
 @Component({
-  selector: 'app-flight-edit',
-  templateUrl: './flight-edit.component.html'
+    selector: 'app-flight-edit',
+    templateUrl: './flight-edit.component.html',
+    standalone: true,
+    imports: [ReactiveFormsModule]
 })
 export class FlightEditComponent implements OnChanges {
   @Input() flight = initialFlight;
