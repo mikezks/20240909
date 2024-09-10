@@ -8,7 +8,7 @@
     <div class="card-body">
 
       <app-flight-filter
-        [filter]="filter"
+        [filter]="filter()"
         (searchTrigger)="search($event)"
         >
         <div *ngIf="flights.length" class="flight-filter-info">
@@ -19,6 +19,7 @@
         >Reset</button>
       </app-flight-filter>
 
+      <p>{{ flightRoute() }}</p>
     </div>
   </div>
 
