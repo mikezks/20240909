@@ -1,0 +1,8 @@
+{
+  "userInfo": {
+    "username": "mary.smith",
+    "firstname": "Mary",
+    "lastname": "Smith"
+  },
+  "apiUrl": "https://demo.angulararchitects.io/api"
+}
