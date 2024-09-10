@@ -1,10 +1,10 @@
 import { Routes } from "@angular/router";
 import { provideEffects } from "@ngrx/effects";
 import { provideState } from "@ngrx/store";
+import { FlightBookingComponent, FlightEditComponent, FlightSearchComponent } from "./feature-flight";
 import { TicketEffects } from "./logic-flight/+state/effects";
 import { ticketFeature } from "./logic-flight/+state/reducer";
-import { FlightSearchComponent, FlightEditComponent, FlightBookingComponent } from "./feature-flight";
-import { flightsResolverConfig } from "./logic-flight/data-access/flight.resolver";
+import { resolveFlight } from "./logic-flight/data-access/flight.resolver";
 
 
 export const BOOKING_ROUTES: Routes = [
@@ -36,6 +36,12 @@ export const BOOKING_ROUTES: Routes = [
           {
             path: 'edit/:id',
             component: FlightEditComponent,
+            data: {
+              name: 'Mary'
+            },
+            resolve: {
+              flight: resolveFlight
+            }
           }
         ]
       }
