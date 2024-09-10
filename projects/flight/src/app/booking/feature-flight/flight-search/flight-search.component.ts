@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Injector, runInInjectionContext } from '@angular/core';
+import { Component, effect, inject, Injector, runInInjectionContext, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight, FlightFilter, injectTicketsFacade } from '../../logic-flight';
 import { FlightCardComponent, FlightFilterComponent } from '../../ui-flight';
 import { Router } from '@angular/router';
+import { combineLatest, distinctUntilChanged, of } from 'rxjs';
 
 
 @Component({
@@ -31,6 +32,33 @@ export class FlightSearchComponent {
     5: true
   };
   protected flights$ = this.ticketsFacade.flights$;
+
+  constructor() {
+    const user = signal({ name:'Peter' });
+    const product = signal({ desc:'Angular Developer PC' });
+
+    effect(() => {
+      console.log(
+        user(),
+        product()
+      );
+    });
+
+    const user$ = of({ name:'Peter' });
+    const product$ = of({ desc:'Angular Developer PC' });
+
+    combineLatest({
+      user: user$,
+      product: product$
+    }).pipe(
+      distinctUntilChanged(),
+    ).subscribe({
+      next: ({user, product }) => console.log(
+        user,
+        product
+      )
+    });
+  }
 
   protected search(filter: FlightFilter): void {
     const router = runInInjectionContext(
