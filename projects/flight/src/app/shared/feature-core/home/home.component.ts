@@ -23,7 +23,7 @@ import { CONFIG_STATE, injectUsername } from '../../util-config';
           <li>... and much more!</li>
         </ul>
 
-        <p>Username: {{ username }}</p>
+        <p>Username: {{ username() }}</p>
       </div>
     </div>
   `,
@@ -35,4 +35,15 @@ import { CONFIG_STATE, injectUsername } from '../../util-config';
 })
 export class HomeComponent {
   username = injectUsername();
+
+  constructor() {
+    const configState = inject(CONFIG_STATE);
+    setTimeout(() => configState.update(state => ({
+      ...state,
+      userInfo: {
+        ...state.userInfo,
+        username: 'peter.doe'
+      }
+    })), 3_000);
+  }
 }

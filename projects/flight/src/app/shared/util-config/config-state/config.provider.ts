@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, EnvironmentProviders, inject, InjectionToken, makeEnvironmentProviders, signal, WritableSignal } from "@angular/core";
+import { APP_INITIALIZER, computed, EnvironmentProviders, inject, InjectionToken, makeEnvironmentProviders, signal, WritableSignal } from "@angular/core";
 import { ConfigState, initialConfigState } from "./config.model";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs";
@@ -25,5 +25,6 @@ export function provideConfigState(url: string): EnvironmentProviders {
 }
 
 export function injectUsername() {
-  return inject(CONFIG_STATE)().userInfo.firstname;
+  const configState = inject(CONFIG_STATE);
+  return computed(() => configState().userInfo.username);
 }
