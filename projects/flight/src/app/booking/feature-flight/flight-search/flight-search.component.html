@@ -1,3 +1,5 @@
+@let flightState = flights();
+
 <div class="card">
   <div class="card-header">
     <h2 class="card-title">Flight Search</h2>
@@ -5,13 +7,14 @@
 
   <div class="card-body">
     <app-flight-filter
-    [filter]="filter()"
-    (searchTrigger)="search($event)"
+      #flightFilter
+      [filter]="filter()"
+      (searchTrigger)="search($event)"
     >
-    <div *ngIf="flights().length" class="flight-filter-info">
-      {{ flights().length }} flights found!
+    <div *ngIf="flightState.length" class="flight-filter-info">
+      {{ flightState.length }} flights found!
     </div>
-    <button *ngIf="flights().length" (click)="reset()"
+    <button *ngIf="flightState.length" (click)="reset()"
     class="btn btn-default flight-filter-button"
     >Reset</button>
   </app-flight-filter>
@@ -21,7 +24,7 @@
 </div>
 
 <div class="row">
-  <div *ngFor="let flight of flights()" class="col-xs-12 col-sm-6 col-md-4">
+  <div *ngFor="let flight of flightState" class="col-xs-12 col-sm-6 col-md-4">
     <app-flight-card
     [item]="flight"
     [(selected)]="basket[flight.id]"
