@@ -10,7 +10,7 @@ export function injectTicketsFacade() {
   const store = inject(Store);
 
   return {
-    flights$: store.select(ticketFeature.selectFlights),
+    flights: store.selectSignal(ticketFeature.selectFlights),
     search: (filter: FlightFilter) =>
       store.dispatch(ticketActions.flightsLoad(filter)),
     update: (flight: Flight) =>
