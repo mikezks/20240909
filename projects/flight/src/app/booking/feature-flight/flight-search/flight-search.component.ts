@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, Injector, runInInjectionContext, signal } from '@angular/core';
+import { Component, computed, effect, inject, Injector, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight, FlightFilter, injectTicketsFacade } from '../../logic-flight';
-import { FlightCardComponent, FlightFilterComponent } from '../../ui-flight';
-import { Router } from '@angular/router';
-import { combineLatest, distinctUntilChanged, of } from 'rxjs';
+import { FlightFilterComponent } from '../../ui-flight';
+import { FlightCardComponent } from '../../ui-flight/flight-card/flight-card.component';
 
 
 @Component({
