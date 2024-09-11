@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, inject, Injector, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, computed, effect, inject, Injector, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight, FlightFilter, injectTicketsFacade } from '../../logic-flight';
 import { FlightFilterComponent } from '../../ui-flight';
@@ -19,6 +19,7 @@ import { FlightCardComponent } from '../../ui-flight/flight-card/flight-card.com
 })
 export class FlightSearchComponent {
   private injector = inject(Injector);
+  private cdRef = inject(ChangeDetectorRef);
   private ticketsFacade = injectTicketsFacade();
 
   protected filter = signal({
@@ -40,7 +41,8 @@ export class FlightSearchComponent {
 
     setTimeout(() => {
       this.basket[3] = false;
-    }, 5_000);
+      this.cdRef.markForCheck();
+    }, 10_000);
   }
 
   protected search(filter: FlightFilter): void {
