@@ -10,19 +10,21 @@
       #flightFilter
       [filter]="filter()"
       (searchTrigger)="search($event)"
-    >
-    @if (flightState.length) {
-      <div class="flight-filter-info">
-        {{ flightState.length }} flights found!
-      </div>
-    }
-    <button *ngIf="flightState.length" (click)="reset()"
-    class="btn btn-default flight-filter-button"
-    >Reset</button>
-  </app-flight-filter>
+      >
+      @if (flightState.length) {
+        <div class="flight-filter-info">
+          {{ flightState.length }} flights found!
+        </div>
+      }
+      @if (flightState.length) {
+        <button (click)="reset()"
+          class="btn btn-default flight-filter-button"
+        >Reset</button>
+      }
+    </app-flight-filter>
 
-  <p>{{ flightRoute() }}</p>
-</div>
+    <p>{{ flightRoute() }}</p>
+  </div>
 </div>
 
 <div class="row">
@@ -32,17 +34,17 @@
         [item]="flight"
         [(selected)]="basket[flight.id]"
         (delayTrigger)="delay($event)"
-      />
+        />
+      </div>
+    }
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Basket</h2>
     </div>
-  }
-</div>
 
-<div class="card">
-  <div class="card-header">
-    <h2 class="card-title">Basket</h2>
+    <div class="card-body">
+      <pre>{{ basket | json }}</pre>
+    </div>
   </div>
-
-  <div class="card-body">
-    <pre>{{ basket | json }}</pre>
-  </div>
-</div>

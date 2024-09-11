@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -12,9 +12,8 @@ import { switchMap } from 'rxjs';
   selector: 'app-passenger-edit',
   standalone: true,
   imports: [
-    NgIf,
     ReactiveFormsModule
-  ],
+],
   templateUrl: './passenger-edit.component.html'
 })
 export class PassengerEditComponent {

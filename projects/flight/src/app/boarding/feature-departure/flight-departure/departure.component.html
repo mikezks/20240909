@@ -9,26 +9,32 @@
       <input id="city" [formControl]="control" class="form-control" />
     </div>
 
-    <div *ngIf="loading">Loading ...</div>
+    @if (loading) {
+      <div>Loading ...</div>
+    }
   </div>
 </div>
 
-<ng-container  *ngIf="flights$ | async as flights">
-  <div class="card" *ngIf="flights.length">
-    <div class="card-body">
-      <table class="table table-condensed">
-        <tr *ngFor="let f of flights">
-          <td>
-            <span class="badge badge-pill badge-info">
-              {{ f.id }}
-            </span>
-          </td>
-          <td>{{ f.from }}</td>
-          <td>{{ f.to }}</td>
-          <td>{{ f.date | date : "dd.MM.yyyy HH:mm" }}</td>
-        </tr>
-      </table>
+@if (flights$ | async; as flights) {
+  @if (flights.length) {
+    <div class="card">
+      <div class="card-body">
+        <table class="table table-condensed">
+          @for (f of flights; track f) {
+            <tr>
+              <td>
+                <span class="badge badge-pill badge-info">
+                  {{ f.id }}
+                </span>
+              </td>
+              <td>{{ f.from }}</td>
+              <td>{{ f.to }}</td>
+              <td>{{ f.date | date : "dd.MM.yyyy HH:mm" }}</td>
+            </tr>
+          }
+        </table>
+      </div>
     </div>
-  </div>
-</ng-container>
+  }
+}
 

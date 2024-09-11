@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FlightFilter } from '../../logic-flight';
@@ -7,7 +7,7 @@ import { FlightFilter } from '../../logic-flight';
 @Component({
   selector: 'app-flight-filter',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './flight-filter.component.html'
 })
 export class FlightFilterComponent {
