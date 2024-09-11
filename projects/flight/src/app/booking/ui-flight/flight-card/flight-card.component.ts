@@ -1,5 +1,5 @@
 import { DatePipe, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, input, Input, model, output, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, input, Input, model, OnDestroy, OnInit, output, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectCdBlink } from '../../../shared/util-cd-visualizer';
 import { Flight } from '../../logic-flight';
@@ -48,12 +48,16 @@ import { Flight } from '../../logic-flight';
     <!-- {{ blink() }} -->
   `
 })
-export class FlightCardComponent {
+export class FlightCardComponent implements OnInit, OnDestroy {
   blink = injectCdBlink();
 
   item = input.required<Flight>();
   selected = model(false);
   delayTrigger = output<Flight>();
+
+  ngOnInit(): void {
+    console.log('Flight Card INIT', this.item().id);
+  }
 
   toggleSelection(): void {
     this.selected.update(state => !state);
@@ -61,5 +65,9 @@ export class FlightCardComponent {
 
   delay(): void {
     this.delayTrigger.emit(this.item());
+  }
+
+  ngOnDestroy(): void {
+    console.log('Flight Card DESTROY', this.item().id);
   }
 }
