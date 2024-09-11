@@ -27,32 +27,24 @@
   </div>
 </div>
 
-@defer (on interaction(flightFilter)) {
-  <div class="row">
-    @for (flight of flightState; track flight.id) {
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <app-flight-card
-          [item]="flight"
-          [(selected)]="basket[flight.id]"
-          (delayTrigger)="delay($event)"
-        />
-      </div>
-    }
-  </div>
-} @placeholder {
-  <p>Please wait - the result view will be shown after interaction with the filter.</p>
-}
-
-@defer (on timer(5000)) {
-  <div class="card">
-    <div class="card-header">
-      <h2 class="card-title">Basket</h2>
+<div class="row">
+  @for (flight of flightState; track flight.id) {
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <app-flight-card
+        [item]="flight"
+        [(selected)]="basket[flight.id]"
+        (delayTrigger)="delay($event)"
+      />
     </div>
+  }
+</div>
 
-    <div class="card-body">
-      <pre>{{ basket | json }}</pre>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Basket</h2>
   </div>
-} @placeholder {
-  <p>Please wait - this will be shown at the right time.</p>
-}
+
+  <div class="card-body">
+    <pre>{{ basket | json }}</pre>
+  </div>
+</div>

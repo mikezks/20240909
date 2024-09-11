@@ -22,8 +22,8 @@ export class FlightSearchComponent {
   private ticketsFacade = injectTicketsFacade();
 
   protected filter = signal({
-    from: 'London',
-    to: 'New York',
+    from: 'Hamburg',
+    to: 'Graz',
     urgent: false
   });
   protected flightRoute = computed(
@@ -37,6 +37,10 @@ export class FlightSearchComponent {
 
   constructor() {
     effect(() => console.log(this.flightRoute()));
+
+    setTimeout(() => {
+      this.basket[3] = false;
+    }, 5_000);
   }
 
   protected search(filter: FlightFilter): void {

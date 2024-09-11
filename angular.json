@@ -23,9 +23,7 @@
             "outputPath": "dist/flight",
             "index": "projects/flight/src/index.html",
             "browser": "projects/flight/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/flight/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
