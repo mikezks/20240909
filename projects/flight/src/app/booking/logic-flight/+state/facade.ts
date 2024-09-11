@@ -12,9 +12,8 @@ export function injectTicketsFacade() {
 
   return {
     flights: store.flights,
-    setFlights: (flights: Flight[]) => store.setFlights(flights),
-    search: (filter: FlightFilter) => {},
-    update: (flight: Flight) => {},
-    reset: () => {}
+    search: (filter: FlightFilter) => store.loadFlights(filter),
+    update: (flight: Flight) => store.updateFlight(flight),
+    reset: () => store.resetFlights()
   };
 }
